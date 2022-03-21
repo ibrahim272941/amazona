@@ -3,14 +3,13 @@ import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
 import { fetchFail, fetchSuccess } from './actions';
 import * as types from './actionTypes';
 
-export function* fetchDataAsync({ payload }) {
+export function* fetchDataAsync() {
   try {
-    const products = axios.get('/api/products');
-    axios.get('/api/products').then((val) => fetchSuccess(val));
-    yield put(fetchSuccess(products));
-    // const products = yield new Promise((resolve) =>
-    //   axios.get('/api/products', resolve)
-    // );
+    const products = yield call(async function () {
+      return await axios.get('/api/products');
+    });
+
+    yield put(fetchSuccess(products.data));
   } catch (error) {
     yield put(fetchFail(error));
   }

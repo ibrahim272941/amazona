@@ -14,7 +14,8 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const [res, setRes] = useState();
   // console.log(products);
-  let rest = new Promise((resolve) => resolve(products));
+
+  console.log(products);
 
   useEffect(() => {
     // const fetchData = async () => {
@@ -29,7 +30,7 @@ const HomeScreen = () => {
     // axios
     //   .get('/api/products')
     //   .then((value) => (value ? setRes(value) : setRes('lutfen bekleyin')));
-    dispatch(fetchStart(''));
+    dispatch(fetchStart());
 
     // let result = axios.get('/api/products');
     // let rest = new Promise((resolve) => axios.get('/api/products', resolve));
@@ -49,10 +50,10 @@ const HomeScreen = () => {
   // fetchData();
   return (
     <div>
-      {/* <h1>Featured Products</h1>
+      <h1>Featured Products</h1>
       <div className="products">
-        {products !== undefined && products.products.length !== 0 ? (
-          products.products.data.map((item, i) => (
+        {products !== undefined && products.length !== 0 ? (
+          products.map((item, i) => (
             <div className="product" key={item.slug}>
               <Link to={`/product/${item.slug}`}>
                 <img src={item.image} alt="" />
@@ -72,7 +73,7 @@ const HomeScreen = () => {
         ) : (
           <p>Please Wait</p>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
