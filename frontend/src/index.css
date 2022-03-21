@@ -11,6 +11,10 @@ body {
   min-height: 100vh;
 }
 
+.rating span {
+  color: #E09E10;
+}
+
 main {
   flex: 1;
 }

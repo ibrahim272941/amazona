@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 
 const initialValue = {
   products: [],
+  fetchproduct: [],
   loading: false,
   error: null,
 };
@@ -17,6 +18,12 @@ const reducer = (state = initialValue, action) => {
       return {
         ...state,
         products: action.payload,
+        loading: false,
+      };
+    case types.FETCH_PRODUCT:
+      return {
+        ...state,
+        fetchproduct: action.payload,
         loading: false,
       };
     case types.FETCH_FAIL:
