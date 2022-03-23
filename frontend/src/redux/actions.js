@@ -15,3 +15,16 @@ export const fetchFail = (error) => ({
   type: types.FETCH_FAIL,
   payload: error,
 });
+
+export const cartAddStart = () => ({
+  type: types.CARD_ADD_ITEM_START,
+});
+export const cartAddSucces = (addChart) => ({
+  type: types.CARD_ADD_ITEM_SUCCESS,
+  payload: addChart,
+});
+
+export const cartAddFail = (error) => ({
+  type: types.CARD_ADD_ITEM_FAIL,
+  payload: error,
+});

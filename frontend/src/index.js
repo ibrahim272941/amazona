@@ -5,10 +5,16 @@ import './index.css';
 import App from './App';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import { HelmetProvider } from 'react-helmet-async';
+import { StoreProvider } from './context/store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <HelmetProvider>
+      <>
+        <App />
+      </>
+    </HelmetProvider>
   </Provider>,
   document.getElementById('root')
 );

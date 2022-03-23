@@ -5,6 +5,11 @@ const initialValue = {
   fetchproduct: [],
   loading: false,
   error: null,
+  cart: {
+    cartItems: [],
+    cartAddLoading: false,
+    cartAddError: null,
+  },
 };
 
 const reducer = (state = initialValue, action) => {
@@ -32,7 +37,25 @@ const reducer = (state = initialValue, action) => {
         error: action.payload,
         loading: false,
       };
-
+    case types.CARD_ADD_ITEM_START:
+      return {
+        ...state,
+        cart: { ...state.cart, cartAddLoading: true },
+      };
+    case types.CARD_ADD_ITEM_SUCCESS:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          cartAddLoading: false,
+          cartItems: [...state.cart.cartItems, action.payload],
+        },
+      };
+    case types.CARD_ADD_ITEM_FAIL:
+      return {
+        ...state,
+        cart: { ...state.cart, cartAddFail: action.payload },
+      };
     default:
       return state;
   }
