@@ -16,8 +16,9 @@ export const fetchFail = (error) => ({
   payload: error,
 });
 
-export const cartAddStart = () => ({
+export const cartAddStart = (product) => ({
   type: types.CARD_ADD_ITEM_START,
+  payload: product,
 });
 export const cartAddSucces = (addChart) => ({
   type: types.CARD_ADD_ITEM_SUCCESS,

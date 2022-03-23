@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
-import { fetchFail, fetchProduct, fetchSuccess } from './actions';
+import {
+  cartAddSucces,
+  cartAddFail,
+  fetchFail,
+  fetchProduct,
+  fetchSuccess,
+} from './actions';
 import * as types from './actionTypes';
 
 export function* fetchDataAsync() {
@@ -31,7 +37,21 @@ export function* fetchProductAsync({ payload }) {
 export function* onFetchProductData() {
   yield takeLatest(types.FETCH_PRODUCT, fetchProductAsync);
 }
-const productSaga = [fork(onFetchData), fork(onFetchProductData)];
+export function* addToCartAsync({ payload }) {
+  try {
+    yield put(cartAddSucces(payload));
+  } catch (error) {
+    cartAddFail(error);
+  }
+}
+export function* onAddToCart() {
+  yield takeLatest(types.CARD_ADD_ITEM_START, addToCartAsync);
+}
+const productSaga = [
+  fork(onFetchData),
+  fork(onFetchProductData),
+  fork(onAddToCart),
+];
 export default function* rootSaga() {
   yield all([...productSaga]);
 }
