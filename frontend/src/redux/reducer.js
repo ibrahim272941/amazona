@@ -26,6 +26,7 @@ const reducer = (state = initialValue, action) => {
         loading: false,
       };
     case types.FETCH_PRODUCT:
+      // console.log(action.payload);
       return {
         ...state,
         fetchproduct: action.payload,
@@ -43,12 +44,22 @@ const reducer = (state = initialValue, action) => {
         cart: { ...state.cart, cartAddLoading: true },
       };
     case types.CARD_ADD_ITEM_SUCCESS:
+      const newItem = action.payload;
+      const existItem = state.cart.cartItems.find(
+        (item) => item._id === newItem._id
+      );
+
+      const cartItems = existItem
+        ? state.cart.cartItems.map((item) =>
+            item._id === existItem._id ? newItem : item
+          )
+        : [...state.cart.cartItems, newItem];
       return {
         ...state,
         cart: {
           ...state.cart,
           cartAddLoading: false,
-          cartItems: [...state.cart.cartItems, action.payload],
+          cartItems: cartItems,
         },
       };
     case types.CARD_ADD_ITEM_FAIL:

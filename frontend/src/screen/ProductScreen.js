@@ -13,21 +13,31 @@ import {
 } from 'react-bootstrap';
 import Rating from '../component/Rating';
 import { Helmet } from 'react-helmet-async';
-import { CARD_ADD_ITEM } from '../redux/actionTypes';
+import axios from 'axios';
 
 const ProductScreen = () => {
   const params = useParams();
   const { slug } = params;
   const { fetchproduct } = useSelector((state) => state);
-  const state = useSelector((state) => state);
+  const { cart } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchProduct(slug));
   }, [slug, dispatch]);
-  const addToCartHandler = () => {
-    dispatch(cartAddStart({ ...fetchproduct, quantity: 1 }));
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find(
+      (item) => item._id === fetchproduct._id
+    );
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    // const { data } = await axios.get(`/api/products/${fetchproduct._id}`);
+
+    // if (data.countInStock < quantity) {
+    //   window.alert('This Product is out of stock');
+    //   return;
+    // }
+    dispatch(cartAddStart({ ...fetchproduct, quantity }));
   };
   return (
     <div>

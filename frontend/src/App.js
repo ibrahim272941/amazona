@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 function App() {
   const { cart } = useSelector((state) => state);
-  console.log(cart.cartItems);
+  console.log(cart);
   return (
     <Router>
       <div className="d-flex flex-column site-contianer">
@@ -24,7 +24,7 @@ function App() {
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge className="mx-2 mb-1" pill bg="danger">
-                      {cart.cartItems.length}
+                      {cart.cartItems.reduce((a, b) => a + b.quantity, 0)}
                     </Badge>
                   )}
                 </Link>

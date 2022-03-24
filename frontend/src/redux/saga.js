@@ -23,10 +23,12 @@ export function* fetchDataAsync() {
 export function* onFetchData() {
   yield takeLatest(types.FETCH_REQUEST, fetchDataAsync);
 }
-export function* fetchProductAsync({ payload }) {
+export function* fetchProductAsync(payload) {
+  const slug = payload.payload;
+
   try {
     const products = yield call(async function () {
-      return await axios.get(`/api/products/slug/${payload}`);
+      return await axios.get(`/api/products/slug/${slug}`);
     });
 
     yield put(fetchProduct(products.data));
