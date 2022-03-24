@@ -44,3 +44,7 @@ main {
 .product-info {
   padding: 1rem;
 }
+
+.img-thumbnail {
+  width: 80px;
+}

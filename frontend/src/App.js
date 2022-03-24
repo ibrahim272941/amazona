@@ -6,10 +6,11 @@ import ProductScreen from './screen/ProductScreen';
 import { Badge, Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector } from 'react-redux';
+import CartScreen from './screen/CartScreen';
 
 function App() {
   const { cart } = useSelector((state) => state);
-  console.log(cart);
+
   return (
     <Router>
       <div className="d-flex flex-column site-contianer">
@@ -37,6 +38,7 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
             </Routes>
           </Container>
         </main>
