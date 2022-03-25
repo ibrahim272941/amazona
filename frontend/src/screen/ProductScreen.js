@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useContext } from 'react';
-import { cartAddStart, cartAddSucces, fetchProduct } from '../redux/actions';
+import { useEffect } from 'react';
+import { cartAddStart, fetchProduct } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 import {
   Badge,
   Button,
@@ -20,7 +21,7 @@ const ProductScreen = () => {
   const { slug } = params;
   const { fetchproduct } = useSelector((state) => state);
   const { cart } = useSelector((state) => state);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,12 +33,13 @@ const ProductScreen = () => {
     );
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${fetchproduct._id}`);
-    console.log(data);
+
     if (data.countInStock < quantity) {
       window.alert('This Product is out of stock');
       return;
     }
     dispatch(cartAddStart({ ...fetchproduct, quantity }));
+    // navigate('/cart');
   };
   return (
     <div>

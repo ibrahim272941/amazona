@@ -6,6 +6,8 @@ import {
   fetchFail,
   fetchProduct,
   fetchSuccess,
+  cartRemoveStart,
+  cartRemoveSuccess,
 } from './actions';
 import * as types from './actionTypes';
 
@@ -49,10 +51,23 @@ export function* addToCartAsync({ payload }) {
 export function* onAddToCart() {
   yield takeLatest(types.CARD_ADD_ITEM_START, addToCartAsync);
 }
+
+export function* cardRemoveItemAsync({ payload }) {
+  console.log(payload);
+  try {
+    yield put(cartRemoveSuccess(payload));
+  } catch (error) {
+    console.log(error);
+  }
+}
+export function* onCardRemoveItem() {
+  yield takeLatest(types.CARD_REMOVE_ITEM_START, cardRemoveItemAsync);
+}
 const productSaga = [
   fork(onFetchData),
   fork(onFetchProductData),
   fork(onAddToCart),
+  fork(onCardRemoveItem),
 ];
 export default function* rootSaga() {
   yield all([...productSaga]);

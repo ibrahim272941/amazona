@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 import {
   Col,
   ListGroup,
@@ -8,14 +9,32 @@ import {
   Card,
 } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { cartAddStart, cartRemoveStart } from '../redux/actions';
 
 const CartScreen = () => {
   const {
     cart: { cartItems },
   } = useSelector((state) => state);
-  console.log(cartItems);
+
+  useEffect(() => {}, []);
+  const dispatch = useDispatch();
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('This Product is out of stock');
+      return;
+    } else if (quantity < 0) {
+      window.alert('Quantity cannot be 0');
+      return;
+    }
+    dispatch(cartAddStart({ ...item, quantity }));
+    console.log(data);
+  };
+  const removeItemHanlder = (item) => {
+    dispatch(cartRemoveStart(item));
+  };
   return (
     <div>
       <Helmet>
@@ -40,10 +59,21 @@ const CartScreen = () => {
                           alt={item.name}
                           className="img-fluid rounded img-thumbnail"
                         />
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                        <Link
+                          style={{ textDecoration: 'none', marginLeft: '10px' }}
+                          to={`/product/${item.slug}`}
+                        >
+                          {item.name}
+                        </Link>
                       </Col>
                       <Col md={3}>
-                        <Button variant="light" disable={item.quantity === 1}>
+                        <Button
+                          variant="light"
+                          disable={item.quantity === 0}
+                          onClick={() => {
+                            updateCartHandler(item, item.quantity - 1);
+                          }}
+                        >
                           <i className="fa fa-minus-circle"></i>
                         </Button>
 
@@ -51,6 +81,9 @@ const CartScreen = () => {
                         <Button
                           variant="light"
                           disable={item.quantity === item.countInStock}
+                          onClick={() => {
+                            updateCartHandler(item, item.quantity + 1);
+                          }}
                         >
                           <i className="fa fa-plus-circle"></i>
                         </Button>
@@ -59,7 +92,10 @@ const CartScreen = () => {
                         <strong>${item.price}</strong>
                       </Col>
                       <Col md={2}>
-                        <Button variant="light">
+                        <Button
+                          variant="light"
+                          onClick={() => removeItemHanlder(item)}
+                        >
                           <i className="fa fa-trash-alt" />
                         </Button>
                       </Col>

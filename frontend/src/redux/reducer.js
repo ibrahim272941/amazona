@@ -67,6 +67,20 @@ const reducer = (state = initialValue, action) => {
         ...state,
         cart: { ...state.cart, cartAddFail: action.payload },
       };
+    case types.CARD_REMOVE_ITEM_START:
+      const filteredItem = state.cart.cartItems.filter(
+        (item) => item._id !== action.payload._id
+      );
+
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          cartAddLoading: false,
+          cartItems: filteredItem,
+        },
+      };
+
     default:
       return state;
   }

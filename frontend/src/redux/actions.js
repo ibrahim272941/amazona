@@ -29,3 +29,12 @@ export const cartAddFail = (error) => ({
   type: types.CARD_ADD_ITEM_FAIL,
   payload: error,
 });
+
+export const cartRemoveStart = (item) => ({
+  type: types.CARD_REMOVE_ITEM_START,
+  payload: item,
+});
+export const cartRemoveSuccess = (item) => ({
+  type: types.CARD_REMOVE_ITEM_SUCCESS,
+  payload: item,
+});
