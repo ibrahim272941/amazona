@@ -31,12 +31,12 @@ const ProductScreen = () => {
       (item) => item._id === fetchproduct._id
     );
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    // const { data } = await axios.get(`/api/products/${fetchproduct._id}`);
-
-    // if (data.countInStock < quantity) {
-    //   window.alert('This Product is out of stock');
-    //   return;
-    // }
+    const { data } = await axios.get(`/api/products/${fetchproduct._id}`);
+    console.log(data);
+    if (data.countInStock < quantity) {
+      window.alert('This Product is out of stock');
+      return;
+    }
     dispatch(cartAddStart({ ...fetchproduct, quantity }));
   };
   return (
