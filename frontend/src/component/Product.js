@@ -12,7 +12,6 @@ const Product = ({ product }) => {
   const {
     cart: { cartItems },
   } = useSelector((state) => state);
-  const { fetchproduct } = useSelector((state) => state);
 
   const dispatch = useDispatch();
   const addToCartHandler = async (item) => {

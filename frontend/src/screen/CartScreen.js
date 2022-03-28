@@ -37,7 +37,7 @@ const CartScreen = () => {
     dispatch(cartRemoveStart(item));
   };
   const checkOutHandler = () => {
-    navigate('/signin?redirect=/shippings');
+    navigate('/signin?redirect=/shipping');
   };
   return (
     <div>
@@ -74,7 +74,7 @@ const CartScreen = () => {
                       <Col md={3}>
                         <Button
                           variant="light"
-                          disable={item.quantity === 0}
+                          disable={item.quantity === 0 ? true : false}
                           onClick={() => {
                             updateCartHandler(item, item.quantity - 1);
                           }}
@@ -131,7 +131,7 @@ const CartScreen = () => {
                       }}
                       variant="primary"
                       type="button"
-                      disable={cartItems.length === 0}
+                      disable={cartItems.length === 0 ? true : false}
                       onClick={checkOutHandler}
                     >
                       Proceed to Checkout

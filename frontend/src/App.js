@@ -7,6 +7,7 @@ import { Badge, Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector } from 'react-redux';
 import CartScreen from './screen/CartScreen';
+import SigninScreen from './screen/SigninScreen';
 
 function App() {
   const { cart } = useSelector((state) => state);
@@ -39,6 +40,7 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
               <Route path="/cart" element={<CartScreen />} />
+              <Route path="/signin" element={<SigninScreen />} />
             </Routes>
           </Container>
         </main>
