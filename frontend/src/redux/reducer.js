@@ -25,7 +25,13 @@ const reducer = (state = initialValue, action) => {
         products: action.payload,
         loading: false,
       };
-    case types.FETCH_PRODUCT:
+    case types.FETCH_PRODUCT_START:
+      return {
+        ...state,
+        fetchproduct: action.payload,
+        loading: true,
+      };
+    case types.FETCH_PRODUCT_SUCCESS:
       // console.log(action.payload);
       return {
         ...state,

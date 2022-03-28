@@ -7,8 +7,12 @@ export const fetchSuccess = (products) => ({
   type: types.FETCH_SUCCESS,
   payload: products,
 });
-export const fetchProduct = (slug) => ({
-  type: types.FETCH_PRODUCT,
+export const fetchProductStart = (slug) => ({
+  type: types.FETCH_PRODUCT_START,
+  payload: slug,
+});
+export const fetchProductSucces = (slug) => ({
+  type: types.FETCH_PRODUCT_SUCCESS,
   payload: slug,
 });
 export const fetchFail = (error) => ({

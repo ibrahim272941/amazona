@@ -12,12 +12,13 @@ import { Helmet } from 'react-helmet-async';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { cartAddStart, cartRemoveStart } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 const CartScreen = () => {
   const {
     cart: { cartItems },
   } = useSelector((state) => state);
-
+  const navigate = useNavigate();
   useEffect(() => {}, []);
   const dispatch = useDispatch();
   const updateCartHandler = async (item, quantity) => {
@@ -35,6 +36,9 @@ const CartScreen = () => {
   const removeItemHanlder = (item) => {
     dispatch(cartRemoveStart(item));
   };
+  const checkOutHandler = () => {
+    navigate('/signin?redirect=/shippings');
+  };
   return (
     <div>
       <Helmet>
@@ -44,8 +48,9 @@ const CartScreen = () => {
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
-            <div>
-              Cart is empty ,<Link to="/">Go to Homepage</Link>
+            <div className="bg-warning d-flex justify-content-center h-50 text-center pt-4">
+              <p className="px-3">Cart is empty</p>
+              <Link to="/">Go to Homepage</Link>
             </div>
           ) : (
             <ListGroup>
@@ -127,6 +132,7 @@ const CartScreen = () => {
                       variant="primary"
                       type="button"
                       disable={cartItems.length === 0}
+                      onClick={checkOutHandler}
                     >
                       Proceed to Checkout
                     </Button>

@@ -1,7 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { cartAddStart, fetchProduct } from '../redux/actions';
+import {
+  cartAddStart,
+  fetchProduct,
+  fetchProductStart,
+} from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import {
   Badge,
@@ -23,9 +27,9 @@ const ProductScreen = () => {
   const { cart } = useSelector((state) => state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log(fetchproduct);
   useEffect(() => {
-    dispatch(fetchProduct(slug));
+    dispatch(fetchProductStart(slug));
   }, [slug, dispatch]);
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find(
