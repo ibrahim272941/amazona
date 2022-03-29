@@ -28,10 +28,11 @@ export function* onFetchData() {
 }
 export function* fetchProductAsync(payload) {
   const slug = payload.payload;
+  console.log(typeof slug);
 
   try {
     const products = yield call(async function () {
-      return await axios.get(`/api/products/slug/${slug}`);
+      return await axios.get(`/api/products/slug/${slug ? slug : '/'}`);
     });
 
     yield put(fetchProductSucces(products.data));

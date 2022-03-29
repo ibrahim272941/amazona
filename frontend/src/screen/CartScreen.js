@@ -85,7 +85,7 @@ const CartScreen = () => {
                         <span>{item.quantity}</span>
                         <Button
                           variant="light"
-                          disable={item.quantity === item.countInStock}
+                          // disable={item.quantity === item.countInStock}
                           onClick={() => {
                             updateCartHandler(item, item.quantity + 1);
                           }}

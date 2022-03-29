@@ -12,7 +12,8 @@ const Product = ({ product }) => {
   const {
     cart: { cartItems },
   } = useSelector((state) => state);
-
+  const state = useSelector((state) => state);
+  console.log(state);
   const dispatch = useDispatch();
   const addToCartHandler = async (item) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
