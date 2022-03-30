@@ -7,13 +7,14 @@ import { cartAddStart } from '../redux/actions';
 import Rating from './Rating';
 import { useState } from 'react';
 
-const Product = ({ product }) => {
+const Product = ({ product, id }) => {
   const [buttonDisable, setButtonDisable] = useState(false);
   const {
     cart: { cartItems },
   } = useSelector((state) => state);
-  const state = useSelector((state) => state);
-  console.log(state);
+  console.log(product);
+  // const state = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const addToCartHandler = async (item) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
@@ -34,7 +35,7 @@ const Product = ({ product }) => {
 
   return (
     <div>
-      <Card key={product.slug}>
+      <Card>
         <Link to={`/product/${product.slug}`}>
           <img src={product.image} alt="" className="card-img-top" />
         </Link>
@@ -51,7 +52,7 @@ const Product = ({ product }) => {
           ) : (
             <Button
               onClick={() => addToCartHandler(product)}
-              className="btn-warning"
+              className="btn-warning button-add-to-cart"
             >
               Add Chart
             </Button>

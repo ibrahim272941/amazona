@@ -12,6 +12,7 @@ const HomeScreen = () => {
   const { products } = useSelector((state) => state);
   const dispatch = useDispatch();
 
+  console.log(products.data);
   useEffect(() => {
     dispatch(fetchStart());
   }, [dispatch]);
@@ -24,8 +25,8 @@ const HomeScreen = () => {
       <h1>Featured Products</h1>
       <div className="products">
         <Row>
-          {products.length !== 0 ? (
-            products.map((item, i) => (
+          {products.data.length !== 0 ? (
+            products.data.map((item, i) => (
               <Col key={i} sm={6} md={4} lg={3} className="mb-3">
                 <Product product={item} />
               </Col>

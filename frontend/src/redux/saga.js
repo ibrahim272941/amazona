@@ -1,5 +1,15 @@
 import axios from 'axios';
 import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
+import { database } from '../firebase/firebaseConfig';
+import {
+  onValue,
+  push,
+  query,
+  ref,
+  remove,
+  set,
+  update,
+} from 'firebase/database';
 import {
   cartAddSucces,
   cartAddFail,
@@ -13,12 +23,15 @@ import {
 import * as types from './actionTypes';
 
 export function* fetchDataAsync() {
+  // const userRef = ref(database, `PVEGcGLnQGaXlK1ISXPm2BOVBTy1/product`);
+  // const data = yield new Promise((resolve) => onValue(query(userRef), resolve));
+
   try {
     const products = yield call(async function () {
       return await axios.get('/api/products');
     });
 
-    yield put(fetchSuccess(products.data));
+    yield put(fetchSuccess(products));
   } catch (error) {
     yield put(fetchFail(error));
   }
