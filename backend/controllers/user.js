@@ -22,9 +22,24 @@ export const loginController = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-export const signupController = expressAsyncHandler(
-  async (req, res, next) => {}
-);
+export const signupController = expressAsyncHandler(async (req, res, next) => {
+  try {
+    const { email, password, name } = req.body;
+    if (!email || !password || !name) {
+      throw new Error('Validation Error');
+    }
+    const cryptedPassword = bcrypt.hashSync(password);
+    const newUser = new User({
+      name,
+      email,
+      password: cryptedPassword,
+    });
+    const response = await newUser.save();
+    res.status(204).json({ message: 'user added' });
+  } catch (error) {
+    next(error);
+  }
+});
 export const deleteController = expressAsyncHandler(
   async (req, res, next) => {}
 );
