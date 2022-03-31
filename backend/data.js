@@ -5,15 +5,24 @@ const data = {
     {
       name: 'John Doe',
       email: 'admin@example.com',
-      password: bcrypt.hashSync('12345678'),
+      password: bcrypt.hashSync('123456'),
+      // password: '123456',
       isAdmin: true,
     },
     {
       name: 'Eric Doe',
       email: 'eric@example.com',
-      password: bcrypt.hashSync('12345678'),
+      password: bcrypt.hashSync('123456'),
+      // password: '123456',
       isAdmin: false,
     },
+    // {
+    //   name: 'Elena Doe',
+    //   email: 'elena@example.com',
+    //   password: bcrypt.hashSync('123456'),
+    //   // password: '123456',
+    //   isAdmin: false,
+    // },
   ],
   products: [
     {

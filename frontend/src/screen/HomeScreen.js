@@ -25,7 +25,7 @@ const HomeScreen = () => {
       <h1>Featured Products</h1>
       <div className="products">
         <Row>
-          {products.data.length !== 0 ? (
+          {products.length !== 0 ? (
             products.data.map((item, i) => (
               <Col key={i} sm={6} md={4} lg={3} className="mb-3">
                 <Product product={item} />

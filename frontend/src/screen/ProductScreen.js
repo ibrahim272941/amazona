@@ -22,7 +22,7 @@ import axios from 'axios';
 
 const ProductScreen = () => {
   const params = useParams();
-  const { id } = params;
+  const { slug } = params;
   const { fetchproduct } = useSelector((state) => state);
   const { products } = useSelector((state) => state);
   console.log(products);
@@ -31,8 +31,8 @@ const ProductScreen = () => {
   const dispatch = useDispatch();
   console.log(typeof fetchproduct);
   useEffect(() => {
-    dispatch(fetchProductStart(id));
-  }, [id, dispatch]);
+    dispatch(fetchProductStart(slug));
+  }, [slug, dispatch]);
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find(
       (item) => item._id === fetchproduct._id
