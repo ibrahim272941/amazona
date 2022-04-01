@@ -23,10 +23,10 @@ import axios from 'axios';
 const ProductScreen = () => {
   const params = useParams();
   const { slug } = params;
-  const { fetchproduct } = useSelector((state) => state);
+  const { fetchproduct } = useSelector((state) => state.product);
   const { products } = useSelector((state) => state);
   console.log(products);
-  const { cart } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   console.log(typeof fetchproduct);

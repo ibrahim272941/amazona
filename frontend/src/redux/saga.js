@@ -1,15 +1,6 @@
 import axios from 'axios';
 import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
-import { database } from '../firebase/firebaseConfig';
-import {
-  onValue,
-  push,
-  query,
-  ref,
-  remove,
-  set,
-  update,
-} from 'firebase/database';
+
 import {
   cartAddSucces,
   cartAddFail,
@@ -19,6 +10,8 @@ import {
   cartRemoveStart,
   cartRemoveSuccess,
   fetchProductSucces,
+  userSigninSuccess,
+  userSigninFail,
 } from './actions';
 import * as types from './actionTypes';
 
@@ -78,11 +71,32 @@ export function* cardRemoveItemAsync({ payload }) {
 export function* onCardRemoveItem() {
   yield takeLatest(types.CARD_REMOVE_ITEM_START, cardRemoveItemAsync);
 }
+
+export function* userSigninAsync({ payload }) {
+  try {
+    const { email, password } = payload;
+
+    const { data } = yield call(async function () {
+      return await axios.post(`/api/users/signin`, {
+        email,
+        password,
+      });
+    });
+    console.log(data);
+    yield put(userSigninSuccess(data));
+  } catch (error) {
+    yield put(userSigninFail(error));
+  }
+}
+export function* onUserSignin() {
+  yield takeLatest(types.USER_SIGNIN_START, userSigninAsync);
+}
 const productSaga = [
   fork(onFetchData),
   fork(onFetchProductData),
   fork(onAddToCart),
   fork(onCardRemoveItem),
+  fork(onUserSignin),
 ];
 export default function* rootSaga() {
   yield all([...productSaga]);

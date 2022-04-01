@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 const CartScreen = () => {
   const {
     cart: { cartItems },
-  } = useSelector((state) => state);
+  } = useSelector((state) => state.product);
   const navigate = useNavigate();
   useEffect(() => {}, []);
   const dispatch = useDispatch();
@@ -31,7 +31,6 @@ const CartScreen = () => {
       return;
     }
     dispatch(cartAddStart({ ...item, quantity }));
-    console.log(data);
   };
   const removeItemHanlder = (item) => {
     dispatch(cartRemoveStart(item));

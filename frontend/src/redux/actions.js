@@ -42,3 +42,15 @@ export const cartRemoveSuccess = (item) => ({
   type: types.CARD_REMOVE_ITEM_SUCCESS,
   payload: item,
 });
+export const userSigninStart = (email, password) => ({
+  type: types.USER_SIGNIN_START,
+  payload: { email, password },
+});
+export const userSigninSuccess = (data) => ({
+  type: types.USER_SIGNIN_SUCCESS,
+  payload: data,
+});
+export const userSigninFail = (error) => ({
+  type: types.USER_SIGNIN_FAIL,
+  payload: error,
+});

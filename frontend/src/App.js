@@ -10,7 +10,7 @@ import CartScreen from './screen/CartScreen';
 import SigninScreen from './screen/SigninScreen';
 
 function App() {
-  const { cart } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.product);
 
   return (
     <Router>

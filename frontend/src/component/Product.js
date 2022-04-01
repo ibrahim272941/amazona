@@ -11,8 +11,8 @@ const Product = ({ product, id }) => {
   const [buttonDisable, setButtonDisable] = useState(false);
   const {
     cart: { cartItems },
-  } = useSelector((state) => state);
-  console.log(product);
+  } = useSelector((state) => state.product);
+
   // const state = useSelector((state) => state);
 
   const dispatch = useDispatch();

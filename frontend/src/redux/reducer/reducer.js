@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from '../actionTypes';
 
 const initialValue = {
   products: [],
@@ -10,6 +10,7 @@ const initialValue = {
     cartAddLoading: false,
     cartAddError: null,
   },
+  signinUser: [],
 };
 
 const reducer = (state = initialValue, action) => {
@@ -86,7 +87,21 @@ const reducer = (state = initialValue, action) => {
           cartItems: filteredItem,
         },
       };
+    // case types.USER_SIGNIN_START:
+    //   return state;
 
+    // case types.USER_SIGNIN_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     signinUser: action.payload,
+    //   };
+    // case types.USER_SIGNIN_FAIL:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: action.payload,
+    //   };
     default:
       return state;
   }

@@ -9,10 +9,10 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../component/LoadingBox';
 
 const HomeScreen = () => {
-  const { products } = useSelector((state) => state);
+  const { products } = useSelector((state) => state.product);
+
   const dispatch = useDispatch();
 
-  console.log(products.data);
   useEffect(() => {
     dispatch(fetchStart());
   }, [dispatch]);
