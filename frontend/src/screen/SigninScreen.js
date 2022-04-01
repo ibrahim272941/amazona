@@ -15,13 +15,12 @@ const SigninScreen = () => {
   const redirect = redirectUrl ? redirectUrl : '/';
   const { signinUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  console.log(signinUser.token);
-
+  console.log(redirect);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(userSigninStart(email, password));
     if (signinUser.token) {
-      navigate(redirect || '/');
+      navigate(redirect);
     }
   };
   return (

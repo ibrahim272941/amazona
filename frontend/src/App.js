@@ -3,7 +3,14 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import HomeScreen from './screen/HomeScreen';
 import ProductScreen from './screen/ProductScreen';
-import { Badge, Container, Nav, Navbar } from 'react-bootstrap';
+import {
+  Badge,
+  Container,
+  Dropdown,
+  Nav,
+  Navbar,
+  NavDropdown,
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector } from 'react-redux';
 import CartScreen from './screen/CartScreen';
@@ -11,7 +18,11 @@ import SigninScreen from './screen/SigninScreen';
 
 function App() {
   const { cart } = useSelector((state) => state.product);
-
+  const {
+    signinUser: { user },
+  } = useSelector((state) => state.auth);
+  console.log(user);
+  const signOutHandler = () => {};
   return (
     <Router>
       <div className="d-flex flex-column site-contianer">
@@ -30,6 +41,28 @@ function App() {
                     </Badge>
                   )}
                 </Link>
+                {user ? (
+                  <NavDropdown title={user.name} id="basic-nav-dropdown">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>User Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/orderhistory">
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Divider />
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signOutHandler}
+                    >
+                      Sign Out
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <Link className="nav-link" to="/signin">
+                    Sign In
+                  </Link>
+                )}
               </Nav>
             </Container>
           </Navbar>
