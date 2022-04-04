@@ -3,7 +3,9 @@ import * as types from '../actionTypes';
 const initialValue = {
   loading: false,
   error: null,
-  signinUser: [],
+  signinUser: localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
+    : [],
 };
 
 const authReducer = (state = initialValue, action) => {

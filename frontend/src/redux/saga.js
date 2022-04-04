@@ -82,7 +82,7 @@ export function* userSigninAsync({ payload }) {
         password,
       });
     });
-    console.log(data);
+    localStorage.setItem('userInfo', JSON.stringify(data));
     yield put(userSigninSuccess(data));
   } catch (error) {
     yield put(userSigninFail(error));
