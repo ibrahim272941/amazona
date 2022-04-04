@@ -15,6 +15,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector } from 'react-redux';
 import CartScreen from './screen/CartScreen';
 import SigninScreen from './screen/SigninScreen';
+import ShippingAddresScreen from './screen/ShippingAddressScreen';
 
 function App() {
   const { cart } = useSelector((state) => state.product);
@@ -74,6 +75,7 @@ function App() {
               <Route path="/" element={<HomeScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
+              <Route path="/shipping" element={<ShippingAddresScreen />} />
             </Routes>
           </Container>
         </main>

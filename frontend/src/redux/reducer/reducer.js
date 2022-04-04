@@ -6,7 +6,9 @@ const initialValue = {
   loading: false,
   error: null,
   cart: {
-    cartItems: [],
+    cartItems: localStorage.getItem('cartItem')
+      ? JSON.parse(localStorage.getItem('cartItem'))
+      : [],
     cartAddLoading: false,
     cartAddError: null,
   },

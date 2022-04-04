@@ -52,6 +52,15 @@ export function* onFetchProductData() {
 export function* addToCartAsync({ payload }) {
   try {
     yield put(cartAddSucces(payload));
+    const cart = localStorage.getItem('cartItem');
+    localStorage.setItem('cartItem', JSON.stringify([payload]));
+    console.log(cart);
+    if (cart && Array.isArray(cart)) {
+      cart.push(payload);
+    }
+    // else {
+    //   localStorage.setItem('cartItem', JSON.stringify([payload]));
+    // }
   } catch (error) {
     cartAddFail(error);
   }
